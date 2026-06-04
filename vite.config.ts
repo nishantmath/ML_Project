@@ -1,0 +1,18 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/predict':       'http://localhost:8000',
+      '/batch-predict': 'http://localhost:8000',
+      '/categories':    'http://localhost:8000',
+      '/health':        'http://localhost:8000',
+      '/metrics':       'http://localhost:8000',
+      '/model-info':    'http://localhost:8000',
+      '/monitoring':    'http://localhost:8000',
+    },
+  },
+})
