@@ -12,86 +12,72 @@ export default function ResultCard({ result }: Props) {
   const comparisonRows = result.comparisons ?? []
 
   return (
-    <div className={`animate-fade-up gradient-border rounded-2xl bg-surface-raised p-6 shadow-2xl ${meta.glow} shadow-lg`}>
-
-      {/* ── Top section: icon + category + ring ── */}
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <div className="flex flex-col gap-3">
-          {/* Big icon */}
-          <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border text-3xl ${meta.bg} ${meta.border}`}>
+    <div className="animate-fade-up card p-5">
+      {/* Top */}
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2.5">
+          <div className={`flex h-11 w-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/60 text-2xl`}>
             {meta.icon}
           </div>
           <div>
-            <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-              Predicted Category
-            </p>
+            <p className="section-label mb-1.5">Predicted category</p>
             <CategoryBadge category={result.category} size="lg" />
-            <p className="mt-2 text-xs text-slate-500">
-              Model: <span className="font-medium text-slate-300">{result.selected_model.split('_').join(' ')}</span>
+            <p className="mt-1.5 text-xs text-slate-600">
+              via <span className="text-slate-400">{result.selected_model.split('_').join(' ')}</span>
             </p>
           </div>
         </div>
-
         <ConfidenceRing value={result.confidence} />
       </div>
 
-      {/* ── Divider ── */}
-      <div className="mb-5 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+      <div className="mb-4 h-px bg-slate-800" />
 
-      {/* ── Probability breakdown ── */}
-      <div className="mb-5">
-        <p className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-          Category Breakdown
-        </p>
+      {/* Probability breakdown */}
+      <div className="mb-4">
+        <p className="section-label mb-3">Category breakdown</p>
         <ProbabilityChart
           probabilities={result.all_probabilities}
           topCategory={result.category}
         />
       </div>
 
-      {/* ── Divider ── */}
-      <div className="mb-4 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+      <div className="mb-4 h-px bg-slate-800" />
 
-      {/* ── Preprocessed text ── */}
+      {/* Preprocessed text */}
       <details className="group">
-        <summary className="flex cursor-pointer select-none items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500 transition hover:text-slate-300">
-          <svg className="h-3.5 w-3.5 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+        <summary className="flex cursor-pointer select-none items-center gap-1.5 section-label hover:text-slate-400 transition">
+          <svg className="h-3 w-3 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
           Preprocessed text
         </summary>
-        <div className="mt-3 rounded-xl border border-slate-700/50 bg-slate-900/80 p-4">
-          <p className="font-mono text-[11px] leading-relaxed text-slate-400">
+        <div className="mt-2 rounded-lg border border-slate-800 bg-[#0f1117] p-3">
+          <p className="font-mono text-[11px] leading-relaxed text-slate-500">
             {result.clean_text_preview}
-            {result.clean_text_preview.length === 300 && (
-              <span className="text-slate-600"> …</span>
-            )}
+            {result.clean_text_preview.length === 300 && <span className="text-slate-700"> …</span>}
           </p>
         </div>
       </details>
 
+      {/* Model comparison */}
       {comparisonRows.length > 0 && (
         <>
-          <div className="my-5 h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+          <div className="my-4 h-px bg-slate-800" />
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-              Model comparison
-            </p>
-            <div className="grid gap-2">
-              {comparisonRows.map((prediction) => (
+            <p className="section-label mb-2.5">Model comparison</p>
+            <div className="space-y-1.5">
+              {comparisonRows.map((p) => (
                 <div
-                  key={prediction.model_name}
-                  className={`flex items-center justify-between rounded-xl border px-3 py-2 text-xs ${
-                    prediction.model_name === result.selected_model
-                      ? 'border-indigo-500/40 bg-indigo-500/10'
-                      : 'border-slate-800 bg-slate-950/40'
+                  key={p.model_name}
+                  className={`flex items-center justify-between rounded-lg border px-3 py-2 text-xs ${
+                    p.model_name === result.selected_model
+                      ? 'border-slate-600 bg-slate-800/80 text-slate-200'
+                      : 'border-slate-800 bg-transparent text-slate-500'
                   }`}
                 >
-                  <span className="font-medium text-slate-300">
-                    {prediction.model_name.split('_').join(' ')}
-                  </span>
-                  <span className="text-slate-400">
-                    {prediction.category} · {(prediction.confidence * 100).toFixed(1)}%
+                  <span>{p.model_name.split('_').join(' ')}</span>
+                  <span className="tabular-nums">
+                    {p.category} · {(p.confidence * 100).toFixed(1)}%
                   </span>
                 </div>
               ))}

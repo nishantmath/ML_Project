@@ -6,32 +6,25 @@
   *, *::before, *::after { box-sizing: border-box; }
 
   body {
-    @apply bg-[#080c14] text-slate-100 antialiased;
+    @apply bg-[#0f1117] text-slate-300 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { @apply bg-transparent; }
-  ::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-700; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-700/60; }
 }
 
 @layer utilities {
-  .glow-blue   { box-shadow: 0 0 40px -8px rgba(59,130,246,0.35); }
-  .glow-result { box-shadow: 0 0 60px -12px rgba(99,102,241,0.3); }
-
-  .gradient-border {
-    position: relative;
+  .card {
+    @apply rounded-xl border border-slate-800 bg-[#161b25] shadow-sm;
   }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(99,102,241,0.5), rgba(14,165,233,0.2), rgba(99,102,241,0.1));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+
+  .card-subtle {
+    @apply rounded-xl border border-slate-800/60 bg-[#13181f];
+  }
+
+  .section-label {
+    @apply text-[10px] font-semibold uppercase tracking-widest text-slate-600;
   }
 }
