@@ -6,22 +6,19 @@
   *, *::before, *::after { box-sizing: border-box; }
 
   body {
-    background-color: #1a1814;
-    color: #e8ddd0;
+    background-color: #111214;
+    color: #e4e6e9;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #3d342c; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb { background: #3a3d42; border-radius: 9999px; }
 }
 
 @layer utilities {
-  .warm-card {
-    @apply rounded-lg border border-[#2e2820] bg-[#211e19];
-  }
   .section-label {
-    @apply text-[10px] font-semibold uppercase tracking-widest text-[#6b5c4e];
+    @apply text-[10px] font-semibold uppercase tracking-widest text-[#555d66];
   }
 }

@@ -22,10 +22,10 @@ export default function SampleComplaints({ onSelect }: Props) {
           const meta = CATEGORY_META[s.category]
           return (
             <button key={s.label} onClick={() => onSelect(s.text)}
-              className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition hover:brightness-110 focus:outline-none
-                ${meta?.bg ?? 'bg-stone-800/40'}
-                ${meta?.text ?? 'text-stone-400'}
-                ${meta?.border ?? 'border-stone-700/60'}`}
+              className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition hover:brightness-125 focus:outline-none
+                ${meta?.bg ?? 'bg-zinc-800/50'}
+                ${meta?.text ?? 'text-zinc-400'}
+                ${meta?.border ?? 'border-zinc-700/50'}`}
             >
               <span aria-hidden="true">{meta?.icon}</span>
               {s.label}

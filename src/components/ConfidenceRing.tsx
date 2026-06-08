@@ -17,14 +17,14 @@ export default function ConfidenceRing({ value }: Props) {
     <div className="flex flex-col items-center gap-1.5">
       <div className="relative h-24 w-24">
         <svg className="absolute inset-0 -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r={r} fill="none" stroke="#2e2820" strokeWidth="7" />
+          <circle cx="50" cy="50" r={r} fill="none" stroke="#2a2d31" strokeWidth="7" />
           <circle cx="50" cy="50" r={r} fill="none" stroke={stroke} strokeWidth="7"
             strokeLinecap="round" strokeDasharray={`${dash} ${circ}`}
             style={{ transition: 'stroke-dasharray 0.7s ease-out' }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-xl font-semibold text-[#e8ddd0]">{pct}%</span>
+          <span className="text-xl font-semibold text-[#e4e6e9]">{pct}%</span>
         </div>
       </div>
       <span className={`text-xs font-medium ${labelClass}`}>{label}</span>

@@ -10,50 +10,50 @@ export default function ResultCard({ result }: Props) {
   const comparisonRows = result.comparisons ?? []
 
   return (
-    <div className="animate-fade-up rounded-lg border border-[#2e2820] bg-[#211e19] p-5">
+    <div className="animate-fade-up rounded-lg border border-[#2a2d31] bg-[#1c1e21] p-5">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#3d342c] bg-[#2a2520] text-xl">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#3a3d42] bg-[#252830] text-xl">
             {meta.icon}
           </div>
           <div>
             <p className="section-label mb-1.5">Predicted category</p>
             <CategoryBadge category={result.category} size="lg" />
-            <p className="mt-1.5 text-xs text-[#4a3d32]">
-              via <span className="text-[#8a7060]">{result.selected_model.split('_').join(' ')}</span>
+            <p className="mt-1.5 text-xs text-[#404850]">
+              via <span className="text-[#7a8390]">{result.selected_model.split('_').join(' ')}</span>
             </p>
           </div>
         </div>
         <ConfidenceRing value={result.confidence} />
       </div>
 
-      <div className="mb-4 h-px bg-[#2e2820]" />
+      <div className="mb-4 h-px bg-[#2a2d31]" />
 
       <div className="mb-4">
         <p className="section-label mb-3">Category breakdown</p>
         <ProbabilityChart probabilities={result.all_probabilities} topCategory={result.category} />
       </div>
 
-      <div className="mb-4 h-px bg-[#2e2820]" />
+      <div className="mb-4 h-px bg-[#2a2d31]" />
 
       <details className="group">
-        <summary className="flex cursor-pointer select-none items-center gap-1.5 section-label hover:text-[#8a7060] transition">
+        <summary className="flex cursor-pointer select-none items-center gap-1.5 section-label hover:text-[#7a8390] transition">
           <svg className="h-3 w-3 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
           Preprocessed text
         </summary>
-        <div className="mt-2 rounded-lg border border-[#2e2820] bg-[#191612] p-3">
-          <p className="font-mono text-[11px] leading-relaxed text-[#6b5c4e]">
+        <div className="mt-2 rounded-lg border border-[#2a2d31] bg-[#17191c] p-3">
+          <p className="font-mono text-[11px] leading-relaxed text-[#555d66]">
             {result.clean_text_preview}
-            {result.clean_text_preview.length === 300 && <span className="text-[#3d342c]"> …</span>}
+            {result.clean_text_preview.length === 300 && <span className="text-[#3a3d42]"> …</span>}
           </p>
         </div>
       </details>
 
       {comparisonRows.length > 0 && (
         <>
-          <div className="my-4 h-px bg-[#2e2820]" />
+          <div className="my-4 h-px bg-[#2a2d31]" />
           <div>
             <p className="section-label mb-2.5">Model comparison</p>
             <div className="space-y-1.5">
@@ -61,8 +61,8 @@ export default function ResultCard({ result }: Props) {
                 <div key={p.model_name}
                   className={`flex items-center justify-between rounded-lg border px-3 py-2 text-xs ${
                     p.model_name === result.selected_model
-                      ? 'border-[#c96442]/30 bg-[#c96442]/8 text-[#e8ddd0]'
-                      : 'border-[#2e2820] bg-transparent text-[#6b5c4e]'
+                      ? 'border-[#c96442]/30 bg-[#c96442]/8 text-[#e4e6e9]'
+                      : 'border-[#2a2d31] bg-transparent text-[#555d66]'
                   }`}
                 >
                   <span>{p.model_name.split('_').join(' ')}</span>
