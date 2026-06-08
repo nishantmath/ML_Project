@@ -6,25 +6,22 @@
   *, *::before, *::after { box-sizing: border-box; }
 
   body {
-    @apply bg-[#0f1117] text-slate-300 antialiased;
+    background-color: #f5f0ea;
+    color: #3d2f24;
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { @apply bg-transparent; }
-  ::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-700/60; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #d4c4b4; border-radius: 9999px; }
 }
 
 @layer utilities {
-  .card {
-    @apply rounded-xl border border-slate-800 bg-[#161b25] shadow-sm;
+  .warm-card {
+    @apply rounded-lg border border-[#e8ddd0] bg-[#faf7f4];
   }
-
-  .card-subtle {
-    @apply rounded-xl border border-slate-800/60 bg-[#13181f];
-  }
-
   .section-label {
-    @apply text-[10px] font-semibold uppercase tracking-widest text-slate-600;
+    @apply text-[10px] font-semibold uppercase tracking-widest text-[#9e8a78];
   }
 }

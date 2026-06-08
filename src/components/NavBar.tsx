@@ -8,13 +8,13 @@ const LINKS = [
 export default function NavBar() {
   return (
     <nav
-      className="sticky top-0 z-50 border-b border-slate-800/70 bg-[#0f1117]/95 backdrop-blur-sm"
+      className="sticky top-0 z-50 border-b border-[#e0d4c8] bg-[#f5f0ea]/95 backdrop-blur-sm"
       aria-label="Main navigation"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
-          <span className="text-sm font-semibold text-slate-200">Complaint Intelligence</span>
-          <span className="rounded border border-slate-700 px-1.5 py-0.5 text-[10px] font-medium text-slate-500">
+          <span className="text-sm font-semibold text-[#2c1f14]">Complaint Intelligence</span>
+          <span className="rounded border border-[#d4c4b4] px-1.5 py-0.5 text-[10px] font-medium text-[#9e8a78]">
             CFPB
           </span>
         </div>
@@ -28,8 +28,8 @@ export default function NavBar() {
               className={({ isActive }) =>
                 `rounded-md px-3 py-1.5 text-sm transition ${
                   isActive
-                    ? 'bg-slate-800 text-slate-200 font-medium'
-                    : 'text-slate-500 hover:bg-slate-800/60 hover:text-slate-300'
+                    ? 'bg-[#e8ddd0] text-[#2c1f14] font-medium'
+                    : 'text-[#9e8a78] hover:bg-[#ede7e0] hover:text-[#4a3728]'
                 }`
               }
             >

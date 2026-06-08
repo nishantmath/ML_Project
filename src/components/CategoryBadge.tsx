@@ -1,15 +1,15 @@
 export const CATEGORY_META: Record<string, {
   bg: string; text: string; border: string; icon: string; glow: string
 }> = {
-  'Credit reporting':      { bg: 'bg-slate-800/60', text: 'text-violet-300',  border: 'border-slate-700', icon: '📋', glow: '' },
-  'Credit card / prepaid': { bg: 'bg-slate-800/60', text: 'text-blue-300',    border: 'border-slate-700', icon: '💳', glow: '' },
-  'Bank account':          { bg: 'bg-slate-800/60', text: 'text-cyan-300',    border: 'border-slate-700', icon: '🏦', glow: '' },
-  'Mortgage':              { bg: 'bg-slate-800/60', text: 'text-amber-300',   border: 'border-slate-700', icon: '🏠', glow: '' },
-  'Debt collection':       { bg: 'bg-slate-800/60', text: 'text-rose-300',    border: 'border-slate-700', icon: '📞', glow: '' },
-  'Student loan':          { bg: 'bg-slate-800/60', text: 'text-emerald-300', border: 'border-slate-700', icon: '🎓', glow: '' },
-  'Loans':                 { bg: 'bg-slate-800/60', text: 'text-orange-300',  border: 'border-slate-700', icon: '🚗', glow: '' },
-  'Money services':        { bg: 'bg-slate-800/60', text: 'text-teal-300',    border: 'border-slate-700', icon: '💸', glow: '' },
-  'Other':                 { bg: 'bg-slate-800/60', text: 'text-slate-400',   border: 'border-slate-700', icon: '📁', glow: '' },
+  'Credit reporting':      { bg: 'bg-violet-50',  text: 'text-violet-700',  border: 'border-violet-200', icon: '📋', glow: '' },
+  'Credit card / prepaid': { bg: 'bg-blue-50',    text: 'text-blue-700',    border: 'border-blue-200',   icon: '💳', glow: '' },
+  'Bank account':          { bg: 'bg-cyan-50',    text: 'text-cyan-700',    border: 'border-cyan-200',   icon: '🏦', glow: '' },
+  'Mortgage':              { bg: 'bg-amber-50',   text: 'text-amber-700',   border: 'border-amber-200',  icon: '🏠', glow: '' },
+  'Debt collection':       { bg: 'bg-rose-50',    text: 'text-rose-700',    border: 'border-rose-200',   icon: '📞', glow: '' },
+  'Student loan':          { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200',icon: '🎓', glow: '' },
+  'Loans':                 { bg: 'bg-orange-50',  text: 'text-orange-700',  border: 'border-orange-200', icon: '🚗', glow: '' },
+  'Money services':        { bg: 'bg-teal-50',    text: 'text-teal-700',    border: 'border-teal-200',   icon: '💸', glow: '' },
+  'Other':                 { bg: 'bg-stone-50',   text: 'text-stone-600',   border: 'border-stone-200',  icon: '📁', glow: '' },
 }
 
 const fallback = CATEGORY_META['Other']

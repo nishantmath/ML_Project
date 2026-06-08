@@ -168,39 +168,25 @@ const METRIC_META = [
 
 export default function ModelsPage() {
   return (
-    <div className="relative min-h-screen bg-[#080c14]">
+    <div className="min-h-screen bg-[#f5f0ea]">
       <NavBar />
-
-      {/* Ambient blobs */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/3 h-[500px] w-[500px] rounded-full bg-indigo-600/8 blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 h-[350px] w-[350px] rounded-full bg-green-600/6 blur-[100px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-
-        {/* ── Page header ── */}
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <header className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/25 bg-indigo-500/8 px-4 py-1.5 text-xs font-semibold tracking-wide text-indigo-400">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" aria-hidden="true" />
-            Model Explorer
-          </div>
-          <h1 className="bg-gradient-to-br from-white via-slate-200 to-slate-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+          <p className="section-label mb-2">Model Explorer</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-[#2c1f14] sm:text-4xl">
             The Four Models
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-slate-400">
-            Every prediction you make runs all four models in parallel. Here's how each one
-            was built, what tradeoffs it makes, and where it excels.
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-[#7a6050]">
+            Every prediction runs all four models in parallel. Here's how each one was built,
+            what tradeoffs it makes, and where it excels.
           </p>
         </header>
 
-        {/* ── Training config strip ── */}
-        <section className="mb-12" aria-labelledby="training-config-heading">
-          <h2 id="training-config-heading" className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            Shared training configuration
-          </h2>
-          <div className="gradient-border rounded-2xl bg-surface-raised p-6 shadow-xl">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Training config */}
+        <section className="mb-10" aria-labelledby="training-config-heading">
+          <h2 id="training-config-heading" className="section-label mb-3">Shared training configuration</h2>
+          <div className="rounded-lg border border-[#e8ddd0] bg-[#faf7f4] p-5">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               <ConfigGroup title="Dataset">
                 <ConfigRow label="Source"      value={TRAINING_CONFIG.dataset} />
                 <ConfigRow label="File"        value={TRAINING_CONFIG.source} />
@@ -209,20 +195,18 @@ export default function ModelsPage() {
                 <ConfigRow label="Test split"  value={TRAINING_CONFIG.testSplit} />
                 <ConfigRow label="Random seed" value={String(TRAINING_CONFIG.randomState)} />
               </ConfigGroup>
-
               <ConfigGroup title="TF-IDF Vectorizer">
                 <ConfigRow label="Max features" value={TRAINING_CONFIG.vectorizer.maxFeatures} />
                 <ConfigRow label="N-gram range" value={TRAINING_CONFIG.vectorizer.ngramRange} />
                 <ConfigRow label="Sublinear TF" value={TRAINING_CONFIG.vectorizer.sublinearTf} />
-                <ConfigRow label="Min DF"        value={String(TRAINING_CONFIG.vectorizer.minDf)} />
-                <ConfigRow label="Max DF"        value={TRAINING_CONFIG.vectorizer.maxDf} />
+                <ConfigRow label="Min DF"       value={String(TRAINING_CONFIG.vectorizer.minDf)} />
+                <ConfigRow label="Max DF"       value={TRAINING_CONFIG.vectorizer.maxDf} />
               </ConfigGroup>
-
               <ConfigGroup title="Preprocessing steps">
-                <ol className="list-none space-y-1.5">
+                <ol className="space-y-1.5">
                   {TRAINING_CONFIG.preprocessing.map((step, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
-                      <span className="mt-0.5 shrink-0 rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
+                    <li key={i} className="flex items-start gap-2 text-xs text-[#7a6050]">
+                      <span className="mt-0.5 shrink-0 rounded bg-[#ede7e0] px-1.5 py-0.5 font-mono text-[10px] text-[#9e8a78]">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       {step}
@@ -231,17 +215,11 @@ export default function ModelsPage() {
                 </ol>
               </ConfigGroup>
             </div>
-
-            <div className="mt-6 border-t border-slate-800 pt-5">
-              <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-                Target categories ({TRAINING_CONFIG.categories.length})
-              </p>
+            <div className="mt-5 border-t border-[#e8ddd0] pt-4">
+              <p className="section-label mb-2">Target categories ({TRAINING_CONFIG.categories.length})</p>
               <div className="flex flex-wrap gap-2">
                 {TRAINING_CONFIG.categories.map((cat) => (
-                  <span
-                    key={cat}
-                    className="rounded-full border border-slate-700 bg-slate-800/60 px-3 py-1 text-xs text-slate-300"
-                  >
+                  <span key={cat} className="rounded-md border border-[#e0d4c8] bg-white px-2.5 py-1 text-xs text-[#6b5344]">
                     {cat}
                   </span>
                 ))}
@@ -250,51 +228,45 @@ export default function ModelsPage() {
           </div>
         </section>
 
-        {/* ── Score comparison table ── */}
-        <section className="mb-12" aria-labelledby="comparison-heading">
-          <h2 id="comparison-heading" className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            Performance comparison (test set · macro average)
-          </h2>
-          <div className="gradient-border overflow-auto rounded-2xl bg-surface-raised shadow-xl">
+        {/* Comparison table */}
+        <section className="mb-10" aria-labelledby="comparison-heading">
+          <h2 id="comparison-heading" className="section-label mb-3">Performance comparison (test set · macro average)</h2>
+          <div className="overflow-auto rounded-lg border border-[#e8ddd0] bg-[#faf7f4]">
             <table className="min-w-full border-collapse text-sm">
               <thead>
-                <tr className="border-b border-slate-800 bg-slate-900/60">
-                  <th className="px-5 py-3 text-left text-xs font-semibold text-slate-400">Model</th>
+                <tr className="border-b border-[#e8ddd0] bg-white">
+                  <th className="px-5 py-3 text-left text-xs font-semibold text-[#9e8a78]">Model</th>
                   {METRIC_META.map((m) => (
-                    <th key={m.key} className="px-4 py-3 text-right text-xs font-semibold text-slate-400">
-                      <span className={m.colour}>{m.label}</span>
-                      <p className="mt-0.5 text-[10px] font-normal text-slate-600 max-w-[120px] text-right">{m.desc}</p>
+                    <th key={m.key} className="px-4 py-3 text-right text-xs font-semibold text-[#9e8a78]">
+                      {m.label}
+                      <p className="mt-0.5 text-[10px] font-normal text-[#c4aa95] max-w-[120px] text-right">{m.desc}</p>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {MODELS.map((model) => (
-                  <tr key={model.key} className={`border-b border-slate-800/60 transition hover:bg-slate-800/30 ${model.isBest ? 'bg-indigo-500/5' : ''}`}>
+                  <tr key={model.key} className={`border-b border-[#f0e8e0] transition hover:bg-[#ede7e0] ${model.isBest ? 'bg-[#c96442]/5' : ''}`}>
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-2.5">
-                        <span className="text-xl" aria-hidden="true">{model.emoji}</span>
+                        <span className="text-lg" aria-hidden="true">{model.emoji}</span>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="font-semibold text-slate-200">{model.name}</span>
+                            <span className="font-semibold text-[#2c1f14]">{model.name}</span>
                             {model.isBest && (
-                              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
-                                Best
-                              </span>
+                              <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700">Best</span>
                             )}
                           </div>
-                          <span className="text-xs text-slate-500">{model.tagline}</span>
+                          <span className="text-xs text-[#9e8a78]">{model.tagline}</span>
                         </div>
                       </div>
                     </td>
                     {METRIC_META.map((m) => {
                       const val = model.scores[m.key as keyof typeof model.scores]
-                      const isBestScore = MODELS.every(
-                        (other) => other.scores[m.key as keyof typeof model.scores] <= val
-                      )
+                      const isBestScore = MODELS.every((other) => other.scores[m.key as keyof typeof model.scores] <= val)
                       return (
                         <td key={m.key} className="px-4 py-3.5 text-right">
-                          <span className={`tabular-nums font-semibold ${isBestScore ? m.colour : 'text-slate-300'}`}>
+                          <span className={`tabular-nums font-semibold ${isBestScore ? 'text-[#c96442]' : 'text-[#3d2f24]'}`}>
                             {val.toFixed(2)}%
                           </span>
                         </td>
@@ -307,19 +279,15 @@ export default function ModelsPage() {
           </div>
         </section>
 
-        {/* ── Individual model deep-dives ── */}
+        {/* Model cards */}
         <section aria-labelledby="model-cards-heading">
-          <h2 id="model-cards-heading" className="mb-6 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            Model deep-dives
-          </h2>
-          <div className="space-y-6">
-            {MODELS.map((model, idx) => (
-              <ModelCard key={model.key} model={model} index={idx} />
-            ))}
+          <h2 id="model-cards-heading" className="section-label mb-5">Model deep-dives</h2>
+          <div className="space-y-5">
+            {MODELS.map((model, idx) => <ModelCard key={model.key} model={model} index={idx} />)}
           </div>
         </section>
 
-        <footer className="mt-16 text-center text-xs text-slate-700">
+        <footer className="mt-16 text-center text-xs text-[#c4aa95]">
           All models trained on CFPB data · scikit-learn · TF-IDF · random_state = 42
         </footer>
       </div>
@@ -327,42 +295,37 @@ export default function ModelsPage() {
   )
 }
 
-// ── Sub-components ─────────────────────────────────────────────────────────────
-
 function ModelCard({ model, index }: { model: typeof MODELS[number]; index: number }) {
   return (
     <article
-      className={`gradient-border rounded-2xl bg-surface-raised p-6 shadow-xl ${model.accent.bg} animate-fade-up`}
+      className="animate-fade-up rounded-lg border border-[#e8ddd0] bg-[#faf7f4] p-5"
       style={{ animationDelay: `${index * 60}ms` }}
       aria-labelledby={`model-${model.key}-heading`}
     >
-      {/* Header */}
-      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className={`flex h-14 w-14 items-center justify-center rounded-2xl border text-3xl ${model.accent.bg} ${model.accent.border}`}>
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#e0d4c8] bg-white text-2xl">
             {model.emoji}
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h3 id={`model-${model.key}-heading`} className="text-xl font-bold text-white">
+              <h3 id={`model-${model.key}-heading`} className="text-lg font-semibold text-[#2c1f14]">
                 {model.name}
               </h3>
               {model.isBest && (
-                <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${model.accent.badge}`}>
+                <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">
                   Best model
                 </span>
               )}
             </div>
-            <p className="mt-0.5 text-sm text-slate-400">{model.tagline}</p>
+            <p className="mt-0.5 text-sm text-[#9e8a78]">{model.tagline}</p>
           </div>
         </div>
-
-        {/* Score pills */}
         <div className="flex flex-wrap gap-2">
           {METRIC_META.map((m) => (
-            <div key={m.key} className="rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2 text-center">
-              <p className="text-[10px] uppercase tracking-wide text-slate-600">{m.label}</p>
-              <p className={`text-base font-bold ${m.colour}`}>
+            <div key={m.key} className="rounded-lg border border-[#e0d4c8] bg-white px-3 py-2 text-center">
+              <p className="text-[10px] uppercase tracking-wide text-[#b09a8a]">{m.label}</p>
+              <p className="text-base font-bold text-[#c96442]">
                 {model.scores[m.key as keyof typeof model.scores].toFixed(1)}%
               </p>
             </div>
@@ -370,45 +333,37 @@ function ModelCard({ model, index }: { model: typeof MODELS[number]; index: numb
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1.2fr]">
-        {/* Hyperparameters */}
+      <div className="grid gap-5 lg:grid-cols-[1fr_1fr_1.2fr]">
         <div>
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            Hyperparameters
-          </p>
-          <div className="space-y-2">
+          <p className="section-label mb-2.5">Hyperparameters</p>
+          <div className="space-y-1.5">
             {model.params.map((p) => (
-              <div key={p.label} className="rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-2">
-                <p className="text-[10px] uppercase tracking-wide text-slate-600">{p.label}</p>
-                <p className="mt-0.5 font-mono text-xs text-slate-300">{p.value}</p>
+              <div key={p.label} className="rounded-lg border border-[#e8ddd0] bg-white px-3 py-2">
+                <p className="text-[10px] uppercase tracking-wide text-[#b09a8a]">{p.label}</p>
+                <p className="mt-0.5 font-mono text-xs text-[#3d2f24]">{p.value}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Strengths + Weaknesses */}
         <div className="space-y-4">
           <div>
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-              Strengths
-            </p>
+            <p className="section-label mb-2">Strengths</p>
             <ul className="space-y-1.5">
               {model.strengths.map((s) => (
-                <li key={s} className="flex items-start gap-2 text-xs text-slate-300">
-                  <span className="mt-0.5 shrink-0 text-emerald-400" aria-hidden="true">✓</span>
+                <li key={s} className="flex items-start gap-2 text-xs text-[#4a3728]">
+                  <span className="mt-0.5 shrink-0 text-emerald-600" aria-hidden="true">✓</span>
                   {s}
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-              Weaknesses
-            </p>
+            <p className="section-label mb-2">Weaknesses</p>
             <ul className="space-y-1.5">
               {model.weaknesses.map((w) => (
-                <li key={w} className="flex items-start gap-2 text-xs text-slate-400">
-                  <span className="mt-0.5 shrink-0 text-rose-400" aria-hidden="true">✗</span>
+                <li key={w} className="flex items-start gap-2 text-xs text-[#7a6050]">
+                  <span className="mt-0.5 shrink-0 text-rose-500" aria-hidden="true">✗</span>
                   {w}
                 </li>
               ))}
@@ -416,32 +371,23 @@ function ModelCard({ model, index }: { model: typeof MODELS[number]; index: numb
           </div>
         </div>
 
-        {/* Why this model */}
         <div>
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            How it works
-          </p>
-          <p className="text-sm leading-relaxed text-slate-400">{model.why}</p>
-
-          {/* Mini accuracy bar */}
-          <div className="mt-5">
-            <div className="mb-1 flex justify-between text-xs text-slate-500">
+          <p className="section-label mb-2">How it works</p>
+          <p className="text-sm leading-relaxed text-[#6b5344]">{model.why}</p>
+          <div className="mt-4">
+            <div className="mb-1 flex justify-between text-xs text-[#9e8a78]">
               <span>F1 score</span>
-              <span className="font-semibold text-slate-300">{model.scores.f1.toFixed(2)}%</span>
+              <span className="font-medium text-[#3d2f24]">{model.scores.f1.toFixed(2)}%</span>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#ede7e0]">
               <div
-                className="h-full rounded-full bg-indigo-500 transition-all duration-700"
+                className="h-full rounded-full bg-[#c96442] transition-all duration-700"
                 style={{ width: `${model.scores.f1}%` }}
                 role="progressbar"
                 aria-valuenow={model.scores.f1}
                 aria-valuemin={0}
                 aria-valuemax={100}
               />
-            </div>
-            <div className="mt-3 flex justify-between text-[10px] text-slate-700">
-              <span>0%</span>
-              <span>100%</span>
             </div>
           </div>
         </div>
@@ -453,19 +399,17 @@ function ModelCard({ model, index }: { model: typeof MODELS[number]; index: numb
 function ConfigGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-        {title}
-      </p>
-      <div className="space-y-2">{children}</div>
+      <p className="section-label mb-2">{title}</p>
+      <div className="space-y-1.5">{children}</div>
     </div>
   )
 }
 
 function ConfigRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-start justify-between gap-3 rounded-lg border border-slate-800 bg-slate-950/40 px-3 py-2">
-      <span className="text-[11px] uppercase tracking-wide text-slate-600">{label}</span>
-      <span className="text-right font-mono text-xs text-slate-300">{value}</span>
+    <div className="flex items-start justify-between gap-3 rounded-lg border border-[#e8ddd0] bg-white px-3 py-2">
+      <span className="text-[11px] uppercase tracking-wide text-[#b09a8a]">{label}</span>
+      <span className="text-right font-mono text-xs text-[#3d2f24]">{value}</span>
     </div>
   )
 }
