@@ -137,15 +137,15 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f0ea]">
+    <div className="min-h-screen bg-[#1a1814]">
       <NavBar />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="mb-8 text-center">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-[#b09a8a]">CFPB · Consumer Financial Protection Bureau</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-[#2c1f14] sm:text-4xl">
+          <p className="section-label mb-2">CFPB · Consumer Financial Protection Bureau</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-[#e8ddd0] sm:text-4xl">
             Complaint Classifier
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-[#7a6050]">
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-[#6b5c4e]">
             Multi-model CFPB complaint analysis — prediction, batch upload, evaluation metrics, and monitoring.
           </p>
         </header>
@@ -159,24 +159,21 @@ export default function App() {
 
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
           <div className="flex flex-col gap-4">
-            <div className="rounded-lg border border-[#e8ddd0] bg-[#faf7f4] p-5">
+            <div className="rounded-lg border border-[#2e2820] bg-[#211e19] p-5">
               <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                 <div>
-                  <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#9e8a78]">Single complaint analysis</p>
-                  <h2 className="text-base font-semibold text-[#2c1f14]">Predict and compare models</h2>
+                  <p className="section-label mb-1">Single complaint analysis</p>
+                  <h2 className="text-base font-semibold text-[#e8ddd0]">Predict and compare models</h2>
                 </div>
-                <div className="text-xs text-[#9e8a78]">
+                <div className="text-xs text-[#6b5c4e]">
                   Model
                   <div className="mt-1.5 flex flex-wrap gap-1.5">
                     {availableModels.map((model) => (
-                      <button
-                        key={model}
-                        type="button"
-                        onClick={() => setSelectedModel(model)}
+                      <button key={model} type="button" onClick={() => setSelectedModel(model)}
                         className={`rounded border px-2.5 py-1 text-xs transition ${
                           selectedModel === model
-                            ? 'border-[#c96442] bg-[#c96442]/10 text-[#c96442] font-medium'
-                            : 'border-[#e0d4c8] bg-transparent text-[#9e8a78] hover:border-[#c4aa95] hover:text-[#6b5344]'
+                            ? 'border-[#c96442]/60 bg-[#c96442]/15 text-[#e8a882] font-medium'
+                            : 'border-[#2e2820] bg-transparent text-[#6b5c4e] hover:border-[#3d342c] hover:text-[#8a7060]'
                         }`}
                       >
                         {model === 'best' ? 'Best model' : model.split('_').join(' ')}
@@ -187,36 +184,26 @@ export default function App() {
               </div>
 
               <textarea
-                id="complaint-input"
-                ref={textareaRef}
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value.slice(0, MAX_CHARS))
-                  if (status === 'error') setStatus('idle')
-                }}
-                onKeyDown={handleKeyDown}
-                rows={9}
+                id="complaint-input" ref={textareaRef} value={text}
+                onChange={(e) => { setText(e.target.value.slice(0, MAX_CHARS)); if (status === 'error') setStatus('idle') }}
+                onKeyDown={handleKeyDown} rows={9}
                 placeholder="Describe the consumer complaint in detail..."
-                className="w-full resize-none rounded-lg border border-[#e0d4c8] bg-white px-3.5 py-3 text-sm leading-relaxed text-[#2c1f14] placeholder-[#c4aa95] transition focus:border-[#c96442] focus:outline-none focus:ring-1 focus:ring-[#c96442]/30"
+                className="w-full resize-none rounded-lg border border-[#2e2820] bg-[#191612] px-3.5 py-3 text-sm leading-relaxed text-[#e8ddd0] placeholder-[#3d342c] transition focus:border-[#c96442]/50 focus:outline-none focus:ring-1 focus:ring-[#c96442]/20"
                 aria-describedby="char-count"
               />
 
               <div className="mt-2.5 flex flex-wrap items-center justify-between gap-3">
-                <span id="char-count" className={`text-xs tabular-nums ${charCount > MAX_CHARS * 0.9 ? 'text-amber-600' : 'text-[#b09a8a]'}`}>
+                <span id="char-count" className={`text-xs tabular-nums ${charCount > MAX_CHARS * 0.9 ? 'text-amber-400' : 'text-[#3d342c]'}`}>
                   {charCount.toLocaleString()} / {MAX_CHARS.toLocaleString()}
                   {charCount > 0 && charCount < MIN_CHARS && (
-                    <span className="ml-2 text-rose-500">({MIN_CHARS - charCount} more needed)</span>
+                    <span className="ml-2 text-rose-400">({MIN_CHARS - charCount} more needed)</span>
                   )}
                 </span>
                 <div className="flex items-center gap-2">
                   {text.length > 0 && (
-                    <button onClick={handleClear} className="rounded px-3 py-1.5 text-xs text-[#9e8a78] transition hover:text-[#6b5344]">
-                      Clear
-                    </button>
+                    <button onClick={handleClear} className="rounded px-3 py-1.5 text-xs text-[#4a3d32] transition hover:text-[#8a7060]">Clear</button>
                   )}
-                  <button
-                    onClick={() => void handleSubmit()}
-                    disabled={!canSubmit}
+                  <button onClick={() => void handleSubmit()} disabled={!canSubmit}
                     className="flex items-center gap-2 rounded-lg bg-[#c96442] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#b5593b] disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     {status === 'loading' ? <Spinner /> : null}
@@ -226,27 +213,22 @@ export default function App() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-[#e8ddd0] bg-[#faf7f4] p-4">
+            <div className="rounded-lg border border-[#2e2820] bg-[#211e19] p-4">
               <SampleComplaints onSelect={handleSampleSelect} />
             </div>
 
-            <div className="rounded-lg border border-[#e8ddd0] bg-[#faf7f4] p-4">
+            <div className="rounded-lg border border-[#2e2820] bg-[#211e19] p-4">
               <div className="mb-3">
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#9e8a78]">Batch processing</p>
-                <h2 className="text-base font-semibold text-[#2c1f14]">Upload complaints file</h2>
-                <p className="mt-1 text-xs text-[#9e8a78]">
-                  .txt with one complaint per line, or .csv with a text column. First {MAX_BATCH_COUNT} valid rows processed.
-                </p>
+                <p className="section-label mb-1">Batch processing</p>
+                <h2 className="text-base font-semibold text-[#e8ddd0]">Upload complaints file</h2>
+                <p className="mt-1 text-xs text-[#4a3d32]">.txt with one complaint per line, or .csv with a text column. First {MAX_BATCH_COUNT} valid rows processed.</p>
               </div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".txt,.csv"
+              <input ref={fileInputRef} type="file" accept=".txt,.csv"
                 onChange={(e) => { const f = e.target.files?.[0]; if (f) void handleBatchUpload(f) }}
-                className="block w-full cursor-pointer rounded-lg border border-[#e0d4c8] bg-white px-3 py-2 text-xs text-[#7a6050] file:mr-3 file:rounded file:border-0 file:bg-[#c96442] file:px-3 file:py-1 file:text-xs file:font-medium file:text-white hover:file:bg-[#b5593b]"
+                className="block w-full cursor-pointer rounded-lg border border-[#2e2820] bg-[#191612] px-3 py-2 text-xs text-[#8a7060] file:mr-3 file:rounded file:border-0 file:bg-[#c96442] file:px-3 file:py-1 file:text-xs file:font-medium file:text-white hover:file:bg-[#b5593b]"
               />
-              {batchStatus === 'loading' && <p className="mt-2 text-xs text-[#9e8a78]">Running batch classification…</p>}
-              {batchStatus === 'error'   && <p className="mt-2 text-xs text-rose-600">{batchError}</p>}
+              {batchStatus === 'loading' && <p className="mt-2 text-xs text-[#6b5c4e]">Running batch classification…</p>}
+              {batchStatus === 'error'   && <p className="mt-2 text-xs text-rose-400">{batchError}</p>}
               {batchResults && (
                 <div className="mt-3 grid gap-2 sm:grid-cols-3">
                   <MiniStat label="Processed"  value={batchResults.summary.total} />
@@ -261,9 +243,9 @@ export default function App() {
             {status === 'idle' && !result && <EmptyState />}
             {status === 'loading' && <LoadingState />}
             {status === 'error' && (
-              <div role="alert" className="rounded-lg border border-rose-200 bg-rose-50 p-4">
-                <p className="mb-1 text-sm font-medium text-rose-700">Classification failed</p>
-                <p className="text-xs text-rose-500">{errorMsg}</p>
+              <div role="alert" className="rounded-lg border border-rose-900/50 bg-rose-950/30 p-4">
+                <p className="mb-1 text-sm font-medium text-rose-400">Classification failed</p>
+                <p className="text-xs text-rose-600">{errorMsg}</p>
               </div>
             )}
             {result && <ResultCard result={result} />}
@@ -285,7 +267,7 @@ export default function App() {
           </div>
         )}
 
-        <footer className="mt-16 text-center text-xs text-[#c4aa95]">
+        <footer className="mt-16 text-center text-xs text-[#3d342c]">
           Complaint Intelligence Platform · scikit-learn · TF-IDF · Hosted on HF Spaces
         </footer>
       </div>
@@ -375,32 +357,32 @@ function extractComplaints(raw: string): string[] {
 
 function MiniStat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg border border-[#e8ddd0] bg-[#faf7f4] px-4 py-3">
-      <p className="text-[10px] font-medium uppercase tracking-widest text-[#9e8a78]">{label}</p>
-      <p className="mt-0.5 text-sm font-semibold text-[#3d2f24]">{value}</p>
+    <div className="rounded-lg border border-[#2e2820] bg-[#211e19] px-4 py-3">
+      <p className="section-label">{label}</p>
+      <p className="mt-0.5 text-sm font-semibold text-[#c8b9a8]">{value}</p>
     </div>
   )
 }
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-[#e0d4c8] bg-[#faf7f4] px-6 py-16 text-center">
+    <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-[#2e2820] bg-[#1e1b16] px-6 py-16 text-center">
       <div className="mb-3 text-3xl">🔍</div>
-      <p className="text-sm font-medium text-[#6b5344]">Results will appear here</p>
-      <p className="mt-1 text-xs text-[#b09a8a]">Enter a complaint and click Classify</p>
+      <p className="text-sm font-medium text-[#6b5c4e]">Results will appear here</p>
+      <p className="mt-1 text-xs text-[#3d342c]">Enter a complaint and click Classify</p>
     </div>
   )
 }
 
 function LoadingState() {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-[#e8ddd0] bg-[#faf7f4] px-6 py-16 text-center">
+    <div className="flex flex-col items-center justify-center rounded-lg border border-[#2e2820] bg-[#1e1b16] px-6 py-16 text-center">
       <div className="mb-4 relative h-12 w-12">
         <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-[#c96442]" />
         <div className="absolute inset-2 flex items-center justify-center text-lg">🤖</div>
       </div>
-      <p className="text-sm font-medium text-[#6b5344]">Classifying complaint…</p>
-      <p className="mt-1 text-xs text-[#b09a8a]">Running multi-model comparison pipeline</p>
+      <p className="text-sm font-medium text-[#8a7060]">Classifying complaint…</p>
+      <p className="mt-1 text-xs text-[#4a3d32]">Running multi-model comparison pipeline</p>
     </div>
   )
 }

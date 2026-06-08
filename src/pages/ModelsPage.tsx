@@ -49,7 +49,7 @@ const MODELS = [
     isBest:     true,
     scores:     { accuracy: 81.98, precision: 82.06, recall: 81.98, f1: 81.99 },
     params: [
-      { label: 'Algorithm',      value: 'LinearSVC wrapped with CalibratedClassifierCV' },
+      { label: 'Algorithm',      value: 'LinearSVM wrapped with CalibratedClassifierCV' },
       { label: 'Regularisation', value: 'C = 1.0' },
       { label: 'Max iterations', value: '5,000' },
       { label: 'Class weights',  value: 'balanced (handles skew)' },
